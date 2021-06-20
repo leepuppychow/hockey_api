@@ -21,7 +21,7 @@ class TeamsFacade
             first_name, last_name = player_json[:person][:fullName].split(" ")
             player.first_name = first_name
             player.last_name = last_name
-            player.external_url = NhlStatsapiService.base_url + player_json[:person][:link],
+            player.external_url = NhlStatsapiService.base_url + player_json[:person][:link]
             player.jersey_number = player_json[:jerseyNumber]
             player.position = player_json[:position][:abbreviation]
             player.team = team
