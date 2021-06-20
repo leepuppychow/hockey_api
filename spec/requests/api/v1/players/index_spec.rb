@@ -91,4 +91,46 @@ describe 'Players Index' do
         expect(player_2_json["jersey_number"]).to eq 29
         expect(player_3_json["jersey_number"]).to eq 8
     end
+
+    it "can filter by first_name" do
+        get "/api/v1/teams/#{@avs.abbr}/players", params: {first_name: 'cale'}
+
+        players_json = JSON.parse(response.body)
+        expect(players_json.count).to eq 1
+        expect(players_json[0]["first_name"]).to eq "Cale"
+        expect(players_json[0]["last_name"]).to eq "Makar"
+    end
+
+    it "can filter by last_name" do
+        get "/api/v1/teams/#{@avs.abbr}/players", params: {last_name: 'Mack'}
+
+        players_json = JSON.parse(response.body)
+        expect(players_json.count).to eq 1
+        expect(players_json[0]["first_name"]).to eq "Nathan"
+        expect(players_json[0]["last_name"]).to eq "MacKinnon"
+    end
+
+    it "can filter by position" do
+        get "/api/v1/teams/#{@avs.abbr}/players", params: {position: 'C'}
+
+        players_json = JSON.parse(response.body)
+        expect(players_json.count).to eq 1
+        expect(players_json[0]["first_name"]).to eq "Nathan"
+        expect(players_json[0]["last_name"]).to eq "MacKinnon"
+        expect(players_json[0]["position"]).to eq "C"
+
+        # No goalies in the fixture data
+        get "/api/v1/teams/#{@avs.abbr}/players", params: {position: 'G'}
+        players_json = JSON.parse(response.body)
+        expect(players_json).to eq []
+    end
+
+    it "can filter by jersey_number" do
+        get "/api/v1/teams/#{@avs.abbr}/players", params: {jersey: 92}
+
+        players_json = JSON.parse(response.body)
+        expect(players_json.count).to eq 1
+        expect(players_json[0]["last_name"]).to eq "Landeskog"
+        expect(players_json[0]["jersey_number"]).to eq 92
+    end
 end
