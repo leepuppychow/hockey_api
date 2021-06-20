@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_20_190218) do
+ActiveRecord::Schema.define(version: 2021_06_20_205830) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 2021_06_20_190218) do
   end
 
   create_table "roster_searches", force: :cascade do |t|
-    t.integer "frequency", default: 1, null: false
+    t.integer "frequency", default: 0, null: false
     t.string "team_abbr", null: false
     t.string "position"
     t.integer "jersey_number"
@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 2021_06_20_190218) do
   end
 
   create_table "team_searches", force: :cascade do |t|
-    t.integer "frequency", default: 1, null: false
+    t.integer "frequency", default: 0, null: false
     t.citext "name"
     t.citext "abbr"
     t.citext "division"
