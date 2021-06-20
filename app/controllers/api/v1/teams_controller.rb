@@ -15,6 +15,6 @@ class Api::V1::TeamsController < ApplicationController
                 inaugural_year: team_json[:firstYearOfPlay],
             )
         end
-        render json: teams, status: 200
+        render json: teams, status: 200, each_serializer: TeamSerializer
     end
 end
