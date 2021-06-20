@@ -1,6 +1,7 @@
 class Api::V1::TeamsController < ApplicationController
     def index
-        TeamsFacade.upsert_teams
+        TeamsFacade.upsert_teams # TODO: try to minimize the DB writes happening in here
+        TeamSearchesFacade.update_searches(team_params)
         teams = Team
             .where(name_filter)
             .where(abbr_filter)
