@@ -19,7 +19,8 @@ This is an API to search for NHL hockey team and roster information for the 2020
       ~~> Slugs: https://backend.turing.edu/module2/lessons/callbacks_and_refactoring
 
   - Filter Query Params:
-    * full_name="Nathan MacKinnon"
+    * first_name="Nathan"
+    * last_name="MacKinnon"
     * position="C" (options C, LW, RW, D, G)
     * jersey=29
   - Sort query params
@@ -43,7 +44,8 @@ MODELS
 2. Player (note use updated_at timestamp and if current date is > 1 day call external API and refresh this cache)
   - id
   - id_team
-  - full_name
+  - first_name
+  - last_name
   - external_url
   - jersey_number
   - position (C, LW, RW, D, G)
@@ -60,7 +62,8 @@ MODELS
   - id
   - frequency
   - team_abbr
-  - full_name
+  - first_name
+  - last_name
   - position
   - jersey_number
 
