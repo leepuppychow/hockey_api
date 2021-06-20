@@ -19,7 +19,7 @@ class Api::V1::TeamsController < ApplicationController
         end
 
         def name_filter
-            ['name ILIKE ?', "%#{team_params[:name].strip.downcase}%"] unless team_params[:name].blank?
+            ['name ILIKE ?', "%#{team_params[:name].strip}%"] unless team_params[:name].blank?
         end
 
         def abbr_filter
@@ -27,11 +27,11 @@ class Api::V1::TeamsController < ApplicationController
         end
 
         def division_filter
-            ['division ILIKE ?', "%#{team_params[:division].strip.downcase}%"] unless team_params[:division].blank?
+            ['division ILIKE ?', "%#{team_params[:division].strip}%"] unless team_params[:division].blank?
         end
 
         def conference_filter
-            ['conference ILIKE ?', "%#{team_params[:conference].strip.downcase}%"] unless team_params[:conference].blank?
+            ['conference ILIKE ?', "%#{team_params[:conference].strip}%"] unless team_params[:conference].blank?
         end
 
         def sort_mappings

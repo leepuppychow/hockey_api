@@ -29,11 +29,11 @@ class Api::V1::PlayersController < ApplicationController
         end
 
         def first_name_filter
-            ['first_name ILIKE ?', "%#{player_params[:first_name].strip.downcase}%"] unless player_params[:first_name].blank?
+            ['first_name ILIKE ?', "%#{player_params[:first_name].strip}%"] unless player_params[:first_name].blank?
         end
 
         def last_name_filter
-            ['last_name ILIKE ?', "%#{player_params[:last_name].strip.downcase}%"] unless player_params[:last_name].blank?
+            ['last_name ILIKE ?', "%#{player_params[:last_name].strip}%"] unless player_params[:last_name].blank?
         end
 
         def position_filter
