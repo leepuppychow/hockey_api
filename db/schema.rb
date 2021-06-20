@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_20_010438) do
+ActiveRecord::Schema.define(version: 2021_06_20_190218) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "citext"
   enable_extension "plpgsql"
 
   create_table "players", force: :cascade do |t|
@@ -40,12 +41,13 @@ ActiveRecord::Schema.define(version: 2021_06_20_010438) do
 
   create_table "team_searches", force: :cascade do |t|
     t.integer "frequency", default: 1, null: false
-    t.string "name", null: false
-    t.string "abbr"
-    t.string "division"
-    t.string "conference"
+    t.citext "name"
+    t.citext "abbr"
+    t.citext "division"
+    t.citext "conference"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["name", "abbr", "division", "conference"], name: "ix_unique_team_search", unique: true
   end
 
   create_table "teams", force: :cascade do |t|
