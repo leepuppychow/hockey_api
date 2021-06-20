@@ -39,66 +39,67 @@
             "active" : true
         }, 
         {
-            "id" : 2,
-            "name" : "New York Islanders",
-            "link" : "/api/v1/teams/2",
+            "id" : 21,
+            "name" : "Colorado Avalanche",
+            "link" : "/api/v1/teams/21",
             "venue" : {
-                "name" : "Nassau Veterans Memorial Coliseum",
-                "link" : "/api/v1/venues/null",
-                "city" : "Uniondale",
+                "id" : 5064,
+                "name" : "Ball Arena",
+                "link" : "/api/v1/venues/5064",
+                "city" : "Denver",
                 "timeZone" : {
-                "id" : "America/New_York",
-                "offset" : -4,
-                "tz" : "EDT"
+                    "id" : "America/Denver",
+                    "offset" : -6,
+                    "tz" : "MDT"
                 }
             },
-            "abbreviation" : "NYI",
-            "teamName" : "Islanders",
-            "locationName" : "New York",
-            "firstYearOfPlay" : "1972",
+            "abbreviation" : "COL",
+            "teamName" : "Avalanche",
+            "locationName" : "Colorado",
+            "firstYearOfPlay" : "1979",
             "division" : {
-                "id" : 25,
-                "name" : "MassMutual East",
-                "link" : "/api/v1/divisions/25"
+                "id" : 27,
+                "name" : "Honda West",
+                "link" : "/api/v1/divisions/27"
             },
             "conference" : {
-                "id" : 6,
-                "name" : "Eastern",
-                "link" : "/api/v1/conferences/6"
+                "id" : 5,
+                "name" : "Western",
+                "link" : "/api/v1/conferences/5"
             },
             "franchise" : {
-                "franchiseId" : 22,
-                "teamName" : "Islanders",
-                "link" : "/api/v1/franchises/22"
+                "franchiseId" : 27,
+                "teamName" : "Avalanche",
+                "link" : "/api/v1/franchises/27"
             },
-            "shortName" : "NY Islanders",
-            "officialSiteUrl" : "http://www.newyorkislanders.com/",
-            "franchiseId" : 22,
+            "shortName" : "Colorado",
+            "officialSiteUrl" : "http://www.coloradoavalanche.com/",
+            "franchiseId" : 27,
             "active" : true
         }, 
         {
-            "id" : 3,
-            "name" : "New York Rangers",
-            "link" : "/api/v1/teams/3",
+            "id" : 8,
+            "name" : "Montréal Canadiens",
+            "link" : "/api/v1/teams/8",
             "venue" : {
-                "id" : 5054,
-                "name" : "Madison Square Garden",
-                "link" : "/api/v1/venues/5054",
-                "city" : "New York",
+                "id" : 5028,
+                "name" : "Bell Centre",
+                "link" : "/api/v1/venues/5028",
+                "city" : "Montréal",
                 "timeZone" : {
-                "id" : "America/New_York",
-                "offset" : -4,
-                "tz" : "EDT"
+                    "id" : "America/Montreal",
+                    "offset" : -4,
+                    "tz" : "EDT"
                 }
             },
-            "abbreviation" : "NYR",
-            "teamName" : "Rangers",
-            "locationName" : "New York",
-            "firstYearOfPlay" : "1926",
+            "abbreviation" : "MTL",
+            "teamName" : "Canadiens",
+            "locationName" : "Montréal",
+            "firstYearOfPlay" : "1909",
             "division" : {
-                "id" : 25,
-                "name" : "MassMutual East",
-                "link" : "/api/v1/divisions/25"
+                "id" : 28,
+                "name" : "Scotia North",
+                "link" : "/api/v1/divisions/28"
             },
             "conference" : {
                 "id" : 6,
@@ -106,13 +107,13 @@
                 "link" : "/api/v1/conferences/6"
             },
             "franchise" : {
-                "franchiseId" : 10,
-                "teamName" : "Rangers",
-                "link" : "/api/v1/franchises/10"
+                "franchiseId" : 1,
+                "teamName" : "Canadiens",
+                "link" : "/api/v1/franchises/1"
             },
-            "shortName" : "NY Rangers",
-            "officialSiteUrl" : "http://www.newyorkrangers.com/",
-            "franchiseId" : 10,
+            "shortName" : "Montréal",
+            "officialSiteUrl" : "http://www.canadiens.com/",
+            "franchiseId" : 1,
             "active" : true
         }
     ]
