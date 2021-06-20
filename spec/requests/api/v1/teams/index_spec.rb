@@ -79,4 +79,88 @@ describe "Teams Index" do
         expect(team_2_json["inaugural_year"]).to eq 1979
         expect(team_3_json["inaugural_year"]).to eq 1909
     end
+
+    it "can filter results by team name" do
+        get "/api/v1/teams", params: {name: 'Colorado Avalanche'}
+
+        teams_json = JSON.parse(response.body)
+        expect(teams_json.count).to eq 1
+        team_1_json = teams_json[0]
+
+        expect(team_1_json["name"]).to eq "Colorado Avalanche"
+
+        # Allow case insensitive value:
+        get "/api/v1/teams", params: {name: 'COLORADO avalanche'}
+
+        teams_json = JSON.parse(response.body)
+        expect(teams_json.count).to eq 1
+        team_1_json = teams_json[0]
+
+        expect(team_1_json["name"]).to eq "Colorado Avalanche"
+    end
+
+    it "can filter results by team abbr" do
+        get "/api/v1/teams", params: {abbr: 'COL'}
+
+        teams_json = JSON.parse(response.body)
+        expect(teams_json.count).to eq 1
+        team_1_json = teams_json[0]
+
+        expect(team_1_json["name"]).to eq "Colorado Avalanche"
+        expect(team_1_json["abbr"]).to eq "COL"
+
+        # Allow case insensitive value with extra whitespace:
+        get "/api/v1/teams", params: {abbr: '   col   '}
+
+        teams_json = JSON.parse(response.body)
+        expect(teams_json.count).to eq 1
+        team_1_json = teams_json[0]
+
+        expect(team_1_json["name"]).to eq "Colorado Avalanche"
+        expect(team_1_json["abbr"]).to eq "COL"
+    end
+
+    it "can filter results by team division (string ILIKE matching)" do
+        get "/api/v1/teams", params: {division: 'honda WEST'}
+
+        teams_json = JSON.parse(response.body)
+        expect(teams_json.count).to eq 1
+        team_1_json = teams_json[0]
+
+        expect(team_1_json["name"]).to eq "Colorado Avalanche"
+        expect(team_1_json["abbr"]).to eq "COL"
+        expect(team_1_json["division"]).to eq "Honda West"
+        
+        get "/api/v1/teams", params: {division: 'west'}
+
+        teams_json = JSON.parse(response.body)
+        expect(teams_json.count).to eq 1
+        team_1_json = teams_json[0]
+
+        expect(team_1_json["name"]).to eq "Colorado Avalanche"
+        expect(team_1_json["abbr"]).to eq "COL"
+        expect(team_1_json["division"]).to eq "Honda West"
+    end
+
+    it "can filter results by team conference (string ILIKE matching)" do
+        get "/api/v1/teams", params: {conference: 'Western'}
+
+        teams_json = JSON.parse(response.body)
+        expect(teams_json.count).to eq 1
+        team_1_json = teams_json[0]
+
+        expect(team_1_json["name"]).to eq "Colorado Avalanche"
+        expect(team_1_json["abbr"]).to eq "COL"
+        expect(team_1_json["conference"]).to eq "Western"
+
+        get "/api/v1/teams", params: {conference: 'WEST'}
+
+        teams_json = JSON.parse(response.body)
+        expect(teams_json.count).to eq 1
+        team_1_json = teams_json[0]
+
+        expect(team_1_json["name"]).to eq "Colorado Avalanche"
+        expect(team_1_json["abbr"]).to eq "COL"
+        expect(team_1_json["conference"]).to eq "Western"
+    end
 end
