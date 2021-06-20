@@ -5,6 +5,7 @@ class Api::V1::PlayersController < ApplicationController
         if @team.players.empty?
             @team.players = TeamsFacade.get_roster(@team)
         end
+        RosterSearchesFacade.update_searches(player_params)
         players = @team.players
             .where(first_name_filter)
             .where(last_name_filter)
