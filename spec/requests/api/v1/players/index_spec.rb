@@ -71,4 +71,24 @@ describe 'Players Index' do
         expect(player_2_json["last_name"]).to eq "MacKinnon"
         expect(player_3_json["last_name"]).to eq "Landeskog"
     end
+
+    it "can sort results by jersey_number ASC and DESC" do
+        get "/api/v1/teams/#{@avs.abbr}/players", params: {sort: 'jersey_asc'}
+
+        players_json = JSON.parse(response.body)
+        player_1_json, player_2_json, player_3_json = players_json
+
+        expect(player_1_json["jersey_number"]).to eq 8
+        expect(player_2_json["jersey_number"]).to eq 29
+        expect(player_3_json["jersey_number"]).to eq 92
+
+        get "/api/v1/teams/#{@avs.abbr}/players", params: {sort: 'jersey_desc'}
+        
+        players_json = JSON.parse(response.body)
+        player_1_json, player_2_json, player_3_json = players_json
+
+        expect(player_1_json["jersey_number"]).to eq 92
+        expect(player_2_json["jersey_number"]).to eq 29
+        expect(player_3_json["jersey_number"]).to eq 8
+    end
 end

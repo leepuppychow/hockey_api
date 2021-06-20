@@ -30,6 +30,8 @@ class Api::V1::PlayersController < ApplicationController
                 "first_name_desc" => "first_name DESC",
                 "last_name_asc" => "last_name ASC",
                 "last_name_desc" => "last_name DESC",
+                "jersey_asc" => "jersey_number ASC",
+                "jersey_desc" => "jersey_number DESC",
             }
         end
 end
