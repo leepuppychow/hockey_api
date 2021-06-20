@@ -31,4 +31,52 @@ describe "Teams Index" do
         get "/api/v1/teams"
         expect(Team.count).to eq 3
     end
+
+    it "can sort results by name ASC and DESC" do
+        get "/api/v1/teams", params: {sort: 'name_asc'}
+
+        teams_json = JSON.parse(response.body)
+
+        expect(teams_json.count).to eq 3
+        team_1_json, team_2_json, team_3_json = teams_json
+
+        expect(team_1_json["name"]).to eq "Colorado Avalanche"
+        expect(team_2_json["name"]).to eq "Montréal Canadiens"
+        expect(team_3_json["name"]).to eq "New Jersey Devils"
+
+        get "/api/v1/teams", params: {sort: 'name_desc'}
+        
+        teams_json = JSON.parse(response.body)
+
+        expect(teams_json.count).to eq 3
+        team_1_json, team_2_json, team_3_json = teams_json
+
+        expect(team_1_json["name"]).to eq "New Jersey Devils"
+        expect(team_2_json["name"]).to eq "Montréal Canadiens"
+        expect(team_3_json["name"]).to eq "Colorado Avalanche"
+    end
+
+    it "can sort results by inaugural year ASC and DESC" do
+        get "/api/v1/teams", params: {sort: 'year_asc'}
+
+        teams_json = JSON.parse(response.body)
+
+        expect(teams_json.count).to eq 3
+        team_1_json, team_2_json, team_3_json = teams_json
+
+        expect(team_1_json["inaugural_year"]).to eq 1909
+        expect(team_2_json["inaugural_year"]).to eq 1979
+        expect(team_3_json["inaugural_year"]).to eq 1982
+
+        get "/api/v1/teams", params: {sort: 'year_desc'}
+        
+        teams_json = JSON.parse(response.body)
+
+        expect(teams_json.count).to eq 3
+        team_1_json, team_2_json, team_3_json = teams_json
+
+        expect(team_1_json["inaugural_year"]).to eq 1982
+        expect(team_2_json["inaugural_year"]).to eq 1979
+        expect(team_3_json["inaugural_year"]).to eq 1909
+    end
 end
