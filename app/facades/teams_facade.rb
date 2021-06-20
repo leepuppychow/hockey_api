@@ -13,4 +13,20 @@ class TeamsFacade
             team
         end
     end
+
+    def self.get_roster(team)
+        json = NhlStatsapiService.get_roster(team)
+        players = json[:roster].map do |player_json|
+            player = Player.find_or_initialize_by(id: player_json[:person][:id])
+            first_name, last_name = player_json[:person][:fullName].split(" ")
+            player.first_name = first_name
+            player.last_name = last_name
+            player.external_url = NhlStatsapiService.base_url + player_json[:person][:link],
+            player.jersey_number = player_json[:jerseyNumber]
+            player.position = player_json[:position][:abbreviation]
+            player.team = team
+            player.save
+            player
+        end
+    end
 end
