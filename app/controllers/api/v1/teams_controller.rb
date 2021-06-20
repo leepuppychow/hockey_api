@@ -18,7 +18,7 @@ class Api::V1::TeamsController < ApplicationController
         end
 
         def name_filter
-            ['lower(name) = ?', team_params[:name].strip.downcase] unless team_params[:name].blank?
+            ['name ILIKE ?', "%#{team_params[:name].strip.downcase}%"] unless team_params[:name].blank?
         end
 
         def abbr_filter

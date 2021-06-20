@@ -80,7 +80,7 @@ describe "Teams Index" do
         expect(team_3_json["inaugural_year"]).to eq 1909
     end
 
-    it "can filter results by team name" do
+    it "can filter results by team name (string ILIKE matching)" do
         get "/api/v1/teams", params: {name: 'Colorado Avalanche'}
 
         teams_json = JSON.parse(response.body)
@@ -91,6 +91,14 @@ describe "Teams Index" do
 
         # Allow case insensitive value:
         get "/api/v1/teams", params: {name: 'COLORADO avalanche'}
+
+        teams_json = JSON.parse(response.body)
+        expect(teams_json.count).to eq 1
+        team_1_json = teams_json[0]
+
+        expect(team_1_json["name"]).to eq "Colorado Avalanche"
+
+        get "/api/v1/teams", params: {name: 'avalanche'}
 
         teams_json = JSON.parse(response.body)
         expect(teams_json.count).to eq 1
