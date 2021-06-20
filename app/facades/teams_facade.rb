@@ -1,5 +1,5 @@
 class TeamsFacade
-    def self.teams
+    def self.upsert_teams
         json = NhlStatsapiService.get_teams
         teams = json[:teams].map do |team_json|
             team = Team.find_or_initialize_by(id: team_json[:id])
