@@ -1,11 +1,13 @@
 require 'rails_helper'
 
 describe "Teams Index" do
-    it "can get all existing teams without roster data" do
+    before :each do
         fixture_json = File.read('spec/fixtures/teams_no_roster.json')
-        stub_request(:get, "https://statsapi.web.nhl.com/api/v1/teams").
+        @stub_team_request = stub_request(:get, "https://statsapi.web.nhl.com/api/v1/teams").
             to_return(status: 200, body: fixture_json)
-        
+    end
+
+    it "can get all existing teams without roster data" do
         get "/api/v1/teams"
 
         teams_json = JSON.parse(response.body)
@@ -20,5 +22,13 @@ describe "Teams Index" do
         expect(team_1_json['division']).to be_a(String)
         expect(team_1_json['conference']).to be_a(String)
         expect(team_1_json['inaugural_year']).to be_a(Integer)
+    end
+
+    it "upsert Team records when index endpoint is accessed" do
+        get "/api/v1/teams"
+        expect(Team.count).to eq 3
+
+        get "/api/v1/teams"
+        expect(Team.count).to eq 3
     end
 end
