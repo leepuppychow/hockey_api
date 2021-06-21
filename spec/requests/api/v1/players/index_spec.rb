@@ -134,3 +134,51 @@ describe 'Players Index' do
         expect(players_json[0]["jersey_number"]).to eq 92
     end
 end
+
+describe 'Players Index Unsuccessful Requests' do
+    before :each do
+        fixture_json = File.read('spec/fixtures/avs_with_roster.json')
+        @stub_team_request = stub_request(:get, "https://statsapi.web.nhl.com/api/v1/teams/21/roster").
+            to_return(status: 200, body: fixture_json)
+
+        @avs = Team.create!(
+            id: 21,
+            name: "Colorado Avalanche",
+            abbr: "COL",
+            external_url: "https://statsapi.web.nhl.com/api/v1/teams/21",
+        )
+    end
+
+    it "will return 404 if team abbreviation is not found" do
+        invalid_abbr = 'NOT_A_TEAM'
+        get "/api/v1/teams/#{invalid_abbr}/players"
+
+        json = JSON.parse(response.body)
+        expect(response.status).to eq 404
+        expect(json["error"]).to eq "Cannot find team #{invalid_abbr}"
+    end
+
+    it "when no results are found return empty array, but still 200 status" do
+        get "/api/v1/teams/#{@avs.abbr}/players", params: {last_name: 'Hedjuk'}
+
+        players_json = JSON.parse(response.body)
+        expect(response.status).to eq 200
+        expect(players_json).to eq []
+    end
+
+    it "Invalid filter params will be ignored by strong params, but still return all players on roster" do
+        get "/api/v1/teams/#{@avs.abbr}/players", params: {weight: 165}
+        
+        players_json = JSON.parse(response.body)
+        expect(response.status).to eq 200
+        expect(players_json.length).to eq 3
+    end
+
+    it "Invalid sort values will be ignored, but still return all players on roster" do
+        get "/api/v1/teams/#{@avs.abbr}/players", params: {sort: "weight_asc"}
+
+        players_json = JSON.parse(response.body)
+        expect(response.status).to eq 200
+        expect(players_json.length).to eq 3
+    end
+end
