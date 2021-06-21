@@ -172,3 +172,35 @@ describe "Teams Index" do
         expect(team_1_json["conference"]).to eq "Western"
     end
 end
+
+describe 'Teams Index Unsuccessful Requests' do
+    before :each do
+        fixture_json = File.read('spec/fixtures/teams_no_roster.json')
+        @stub_team_request = stub_request(:get, "https://statsapi.web.nhl.com/api/v1/teams").
+            to_return(status: 200, body: fixture_json)
+    end
+
+    it "when no results are found return empty array, but still 200 status" do
+        get "/api/v1/teams", params: {conference: 'Western', name: "rangers"}
+
+        teams_json = JSON.parse(response.body)
+        expect(response.status).to eq 200
+        expect(teams_json).to eq []
+    end
+
+    it "Invalid filter params will be ignored by strong params, but still return all teams" do
+        get "/api/v1/teams", params: {invalid_filter: "HELLO THERE"}
+
+        teams_json = JSON.parse(response.body)
+        expect(response.status).to eq 200
+        expect(teams_json.length).to eq 3
+    end
+
+    it "Invalid sort values will be ignored, but still return all teams" do
+        get "/api/v1/teams", params: {sort: "division_asc_invalid"}
+
+        teams_json = JSON.parse(response.body)
+        expect(response.status).to eq 200
+        expect(teams_json.length).to eq 3
+    end
+end
