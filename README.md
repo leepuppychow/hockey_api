@@ -15,7 +15,7 @@ Base URL is: https://radiant-sands-65708.herokuapp.com
 
 2. `GET /api/v1/teams` - [gets team information without roster data](https://radiant-sands-65708.herokuapp.com/api/v1/teams)
 
-  - Optional filter query params. Note that partial substring matches will work as well (case insenstive). Examples:
+  - Optional filter query params. Note that partial substring matches will work as well (case insensitive). Examples:
     * name="avalanche" [Example](https://radiant-sands-65708.herokuapp.com/api/v1/teams?name=avalanche)
     * abbr="COL"
     * division="west"
@@ -27,7 +27,7 @@ Base URL is: https://radiant-sands-65708.herokuapp.com
 
 3. `GET /api/v1/teams/:team_abbr/players` - [returns players on a team](https://radiant-sands-65708.herokuapp.com/api/v1/teams/COL/players)
 
-  - Optional filter query params. Note that partial substring matches will work as well (case insenstive). Examples:
+  - Optional filter query params. Note that partial substring matches will work as well (case insensitive). Examples:
     * first_name="Nathan"
     * last_name="mack" [Example](https://radiant-sands-65708.herokuapp.com/api/v1/teams/COL/players?last_name=mack)
     * position="C" (options C, LW, RW, D, G)
