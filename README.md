@@ -42,14 +42,12 @@ Base URL is: https://radiant-sands-65708.herokuapp.com
 
 5. `GET /api/v1/roster_searches` - [returns most frequent roster searches and query terms](https://radiant-sands-65708.herokuapp.com/api/v1/roster_searches)
 
-
-## Local setup
-
-* Versions:
+## Dependencies
   * Ruby 2.5.1
   * Rails 6.1.3.2
   * PostgreSQL 13.3
 
+## Local setup
   1. Clone repository
   2. Install dependencies `bundle install`
   3. Create test and development database: `rake db:create`
