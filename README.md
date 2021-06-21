@@ -16,7 +16,7 @@ Base URL is: https://radiant-sands-65708.herokuapp.com
 2. `GET /api/v1/teams` - [gets team information without roster data](https://radiant-sands-65708.herokuapp.com/api/v1/teams)
 
   - Optional filter query params. Note that partial substring matches will work as well (case insenstive). Examples:
-    * name="Colorado Avalanche" [Example](https://radiant-sands-65708.herokuapp.com/api/v1/teams?name=avalanche)
+    * name="avalanche" [Example](https://radiant-sands-65708.herokuapp.com/api/v1/teams?name=avalanche)
     * abbr="COL"
     * division="west"
     * conference="western"
