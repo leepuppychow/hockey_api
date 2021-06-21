@@ -1,9 +1,9 @@
 # README
 
 ## Project Description
-This is an API to search for NHL hockey team and roster information for the most current season. Currently, there are endpoints to search, sort, and filter team and roster information. Additionally, there are a couple analytics endpoints to see what are the most frequent queries being sent to this API. Please refer to the issues tab for enhancements and future planning.
+This is an API to search for NHL hockey team and roster information for the most current season. Currently, there are endpoints to search, sort, and filter team and roster information. Additionally, there are a couple analytics endpoints to see what are the most frequent queries being sent to this API. Please refer to the [issues](https://github.com/leepuppychow/hockey_api/issues) tab for enhancements and future planning.
 
-This API was made using the data provided bythe [NHL Stats API](https://gitlab.com/dword4/nhlapi/-/blob/master/stats-api.md).
+This API was made using the data provided by the [NHL Stats API](https://gitlab.com/dword4/nhlapi/-/blob/master/stats-api.md).
 
 [Deployed API](https://radiant-sands-65708.herokuapp.com/api/v1/teams)
 
