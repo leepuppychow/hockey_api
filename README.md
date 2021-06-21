@@ -1,95 +1,60 @@
 # README
 
 ## Project Description
-This is an API to search for NHL hockey team and roster information for the 2020-2021 season. 
+This is an API to search for NHL hockey team and roster information for the most current season. Currently, there are endpoints to search, sort, and filter team and roster information. Additionally, there are a couple analytics endpoints to see what are the most frequent queries being sent to this API. Please refer to the issues tab for enhancements and future planning.
+
+This API was made using the data provided bythe [NHL Stats API](https://gitlab.com/dword4/nhlapi/-/blob/master/stats-api.md).
+
+[Deployed API](https://radiant-sands-65708.herokuapp.com/api/v1/teams)
 
 ## Endpoints
 
-1. GET /api/v1/teams (would get all teams with no roster info, maybe paginate?)
-  - Filter query params:
+Base URL is: https://radiant-sands-65708.herokuapp.com
+
+1. `GET /api/v1/ping` - [health check](https://radiant-sands-65708.herokuapp.com/api/v1/ping)
+
+2. `GET /api/v1/teams` - [gets team information without roster data](https://radiant-sands-65708.herokuapp.com/api/v1/teams)
+
+  - Optional filter query params. Note that partial substring matches will work as well (case insenstive). Examples:
     * name="Colorado Avalanche"
     * abbr="COL"
     * division="west"
     * conference="western"
+
   - Sort query params:
-    * sort="name_asc" or "name_desc" (default is ASC)
-    * sort="year_asc" or "year_desc"
+    * sort="name_asc" or "name_desc"
+    * sort="year_asc" or "year_desc" - sorts by the teams' inaugurual year
 
-2. GET /api/v1/teams/COL/players (use a slug based on the team abbr value, would return all players on team)
-      ~~> Slugs: https://backend.turing.edu/module2/lessons/callbacks_and_refactoring
+3. `GET /api/v1/teams/:team_abbr/players` - [returns players on a team](https://radiant-sands-65708.herokuapp.com/api/v1/teams/COL/players)
 
-  - Filter Query Params:
+  - Optional filter query params. Note that partial substring matches will work as well (case insenstive). Examples:
     * first_name="Nathan"
-    * last_name="MacKinnon"
+    * last_name="mack"
     * position="C" (options C, LW, RW, D, G)
     * jersey=29
-  - Sort query params
-    * sort="name_asc" or "name_desc" (default is ASC)
+
+  - Sort query params:
+    * sort="first_name_asc" or "first_name_desc"
+    * sort="last_name_asc" or "last_name_desc"
     * sort="jersey_asc" or "jersey_desc"
 
-3. GET /api/v1/searches (more like an analytics endpoint to see what people are searching for)
-  - Returns JSON with 2 arrays of team and roster searches
+4. `GET /api/v1/team_searches` - [returns most frequent team searches and query terms](https://radiant-sands-65708.herokuapp.com/api/v1/team_searches)
 
-MODELS
+5. `GET /api/v1/roster_searches` - [returns most frequent roster searches and query terms](https://radiant-sands-65708.herokuapp.com/api/v1/roster_searches)
 
-1. Team (note use updated_at timestamp and if current date is > 1 day call external API and refresh this cache)
-  - id
-  - name
-  - abbr
-  - external_url
-  - division
-  - conference
-  - inaugural_year
 
-2. Player (note use updated_at timestamp and if current date is > 1 day call external API and refresh this cache)
-  - id
-  - id_team
-  - first_name
-  - last_name
-  - external_url
-  - jersey_number
-  - position (C, LW, RW, D, G)
-
-3. TeamSearch (unique on name + abbr + division + conference)
-  - id
-  - frequency
-  - name
-  - abbr
-  - division
-  - conference
-
-4. RosterSearch (unique on team_abbr, full_name, position, jersey_number)
-  - id
-  - frequency
-  - team_abbr
-  - first_name
-  - last_name
-  - position
-  - jersey_number
-
-~~> Mocking API calls in tests: https://backend.turing.edu/module3/lessons/testing_tools_for_api_consumption
-~~> Facades and Services: https://backend.turing.edu/module3/lessons/refactoring_api_consumption
-~~> Error handling in Rails: https://backend.turing.edu/module3/lessons/error_handling
-~~> Redis caching with Rails: http://jameshuynh.com/cache/json/rails/2017/08/13/how-to-effectively-cache-json-in-api-rails-app/
-  - Could use another layer of caching with Redis (but for now get MVP working)
-
+## Local setup
 
 * Versions:
-  * Ruby 2.5.0
+  * Ruby 2.5.1
   * Rails 6.1.3.2
+  * PostgreSQL 13.3
 
-* System dependencies
+  1. Clone repository
+  2. Install dependencies `bundle install`
+  3. Create test and development database: `rake db:create`
+  4. Run migrations: `rake db:migrate`
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+  5. To run test suite: `rspec`
+  6. To run local server: `rails s`
+  7. To connect to development postgreSQL database psql client: `rails dbconsole`
