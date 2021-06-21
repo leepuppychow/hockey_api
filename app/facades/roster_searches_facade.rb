@@ -8,6 +8,7 @@ class RosterSearchesFacade
             first_name: params[:first_name],
             last_name: params[:last_name],
             position: params[:position],
+            jersey_number: params[:jersey],
         )
         roster_search.frequency += 1
         roster_search.save
