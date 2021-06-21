@@ -6,6 +6,8 @@ Rails.application.routes.draw do
       resources :teams, only: [:index], param: :abbr do
         resources :players, only: [:index]
       end
+      resources :roster_searches, only: [:index]
+      resources :team_searches, only: [:index]
     end
   end
 end
