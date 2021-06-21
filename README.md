@@ -21,9 +21,9 @@ Base URL is: https://radiant-sands-65708.herokuapp.com
     * division="west"
     * conference="western"
 
-  - Sort query params:
+  - Optional sort query params:
     * sort="name_asc" or "name_desc"
-    * sort="year_asc" or "year_desc" - sorts by the teams' inaugurual year
+    * sort="year_asc" or "year_desc" - sorts by the teams' inaugural year
 
 3. `GET /api/v1/teams/:team_abbr/players` - [returns players on a team](https://radiant-sands-65708.herokuapp.com/api/v1/teams/COL/players)
 
@@ -33,7 +33,7 @@ Base URL is: https://radiant-sands-65708.herokuapp.com
     * position="C" (options C, LW, RW, D, G)
     * jersey=29
 
-  - Sort query params:
+  - Optional sort query params:
     * sort="first_name_asc" or "first_name_desc"
     * sort="last_name_asc" or "last_name_desc"
     * sort="jersey_asc" or "jersey_desc"
