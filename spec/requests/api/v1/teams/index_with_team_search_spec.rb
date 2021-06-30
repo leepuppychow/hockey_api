@@ -54,4 +54,18 @@ describe "Teams Index endpoint upserts TeamSearch records" do
         expect(search_1.frequency).to eq 2
         expect(search_2.frequency).to eq 1
     end
+
+    it "will return an empty array if no teams match filter params" do
+        get "/api/v1/teams", params: {name: 'maple leafs'}
+
+        teams_json = JSON.parse(response.body)
+        expect(teams_json).to eq []
+
+        team_searches = TeamSearch.all
+        search_1 = team_searches[0]
+
+        expect(search_1.name).to eq 'maple leafs'
+        expect(search_1.frequency).to eq 1
+        expect(search_1.teams).to eq []
+    end
 end
