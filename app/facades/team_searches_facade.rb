@@ -1,5 +1,5 @@
 class TeamSearchesFacade
-    def self.update_searches(params)
+    def self.update_searches(params, teams)
         if params.empty?
             return 
         end
@@ -10,6 +10,7 @@ class TeamSearchesFacade
             conference: params[:conference],
         )
         team_search.frequency += 1
+        team_search.teams = teams
         team_search.save
         team_search
     end

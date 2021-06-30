@@ -1,7 +1,6 @@
 class Api::V1::TeamsController < ApplicationController
     def index
         TeamsFacade.upsert_teams # TODO: try to minimize the DB writes happening in here
-        TeamSearchesFacade.update_searches(team_params)
         teams = Team
             .where(name_filter)
             .where(abbr_filter)
@@ -9,6 +8,7 @@ class Api::V1::TeamsController < ApplicationController
             .where(conference_filter)
             .order(sort_mappings[team_params[:sort]])
             .all
+        TeamSearchesFacade.update_searches(team_params, teams)
         render json: teams, status: 200, each_serializer: TeamSerializer
     end
 
