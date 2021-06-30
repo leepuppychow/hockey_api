@@ -5,7 +5,6 @@ class Api::V1::PlayersController < ApplicationController
         if @team.players.empty?
             @team.players = TeamsFacade.get_roster(@team)
         end
-        RosterSearchesFacade.update_searches(player_params)
         players = @team.players
             .where(first_name_filter)
             .where(last_name_filter)
@@ -13,7 +12,8 @@ class Api::V1::PlayersController < ApplicationController
             .where(jersey_filter)
             .order(sort_mappings[player_params[:sort]])
             .all
-
+        RosterSearchesFacade.update_searches(player_params, players)
+        
         render json: players, status: 200, each_serializer: PlayerSerializer
     end
 
