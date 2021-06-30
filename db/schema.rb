@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_30_040633) do
+ActiveRecord::Schema.define(version: 2021_06_30_164338) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -26,6 +26,15 @@ ActiveRecord::Schema.define(version: 2021_06_30_040633) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["team_id"], name: "index_players_on_team_id"
+  end
+
+  create_table "roster_search_players", force: :cascade do |t|
+    t.bigint "player_id"
+    t.bigint "roster_search_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["player_id"], name: "index_roster_search_players_on_player_id"
+    t.index ["roster_search_id"], name: "index_roster_search_players_on_roster_search_id"
   end
 
   create_table "roster_searches", force: :cascade do |t|
@@ -72,6 +81,8 @@ ActiveRecord::Schema.define(version: 2021_06_30_040633) do
   end
 
   add_foreign_key "players", "teams"
+  add_foreign_key "roster_search_players", "players"
+  add_foreign_key "roster_search_players", "roster_searches"
   add_foreign_key "team_search_teams", "team_searches"
   add_foreign_key "team_search_teams", "teams"
 end
