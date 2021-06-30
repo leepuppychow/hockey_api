@@ -30,11 +30,19 @@ describe 'Players Index' do
         expect(search_1.position).to eq 'D'
         expect(search_1.frequency).to eq 1
 
+        expect(search_1.players.count).to eq 1
+        expect(search_1.players[0].first_name).to eq "Cale"
+        expect(search_1.players[0].last_name).to eq "Makar"
+
         # If the same request is made again, frequency for that RosterSearch should be incremented:
         get "/api/v1/teams/#{@avs.abbr}/players", params: {first_name: 'CALE', position: 'd'}
         roster_searches = RosterSearch.all
         search_1 = roster_searches[0]
         expect(search_1.frequency).to eq 2
+
+        expect(search_1.players.count).to eq 1
+        expect(search_1.players[0].first_name).to eq "Cale"
+        expect(search_1.players[0].last_name).to eq "Makar"
 
         get "/api/v1/teams/#{@avs.abbr}/players", params: {position: 'D'}
         roster_searches = RosterSearch.all

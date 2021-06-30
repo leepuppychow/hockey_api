@@ -21,4 +21,8 @@ describe RosterSearch, type: :model do
       expect(search_2.save).to be(false) 
     end
   end
+
+  describe "Relationships" do
+    it {should have_many(:players).through(:roster_search_players)}
+  end
 end

@@ -1,5 +1,5 @@
 class RosterSearchesFacade
-    def self.update_searches(params)
+    def self.update_searches(params, players)
         if params.empty?
             return 
         end
@@ -11,6 +11,7 @@ class RosterSearchesFacade
             jersey_number: params[:jersey],
         )
         roster_search.frequency += 1
+        roster_search.players = players
         roster_search.save
         roster_search
     end
