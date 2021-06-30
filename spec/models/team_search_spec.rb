@@ -24,4 +24,8 @@ describe TeamSearch, type: :model do
       expect(search_4.save).to be(false) 
     end
   end
+
+  describe "Relationships" do
+    it {should have_many(:teams).through(:team_search_teams)}
+  end
 end
